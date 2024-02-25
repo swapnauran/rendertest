@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upscaling Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .scrolling-text {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .scrolling-text p {
+      display: inline-block;
+      white-space: nowrap;
+      margin: 0;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .image-box {
+      width: 310px; /* Set a specific width for the box */
+      border: 2px solid #ccc; /* Add a border for visibility */
+      padding: 10px; /* Optional padding for content within the box */
+    }
+
+    .image-container img {
+      max-width: 100%; /* Adjusted max-width to 100% within the box */
+      height: auto; /* Maintain aspect ratio */
+    }
+
+    .download-link,
+    .upscale-more-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .download-button,
+    .upscale-more-button {
+      padding: 10px;
+      background-color: #4CAF50; /* Green */
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .download-button:hover,
+    .upscale-more-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Image Upscaling</h1>
+  </div>
+
+  <div class="scrolling-text">
+    <p>World Best AI Power Photo Upscaling Website. If You Want ADD FREE Experience Please Buy Our Software Only 10 Dollar For Lifetime</p>
+  </div>
+
+  <h1>Upscaling Result</h1>
+  <div class="image-container">
+    <div class="image-box">
+      <h2>Output Image:</h2>
+      <img src="{{ output_path }}" alt="Upscaled Image">
+    </div>
+  </div>
+  <div class="download-link">
+    <a href="{{ output_path }}" download class="download-button">Download Upscaled Image 2x</a>
+  </div>
+  <div class="upscale-more-link">
+    <a href="index.html" class="upscale-more-button">Upscale More</a>
+  </div>
+</body>
+</html>

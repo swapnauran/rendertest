@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upscaling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 8px; /* Adjusted padding */
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 48px; /* Adjusted font size to 48px */
+            margin-bottom: 8px; /* Adjusted margin bottom */
+        }
+        .marquee-container {
+            overflow: hidden;
+        }
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 30s linear infinite; /* Adjusted animation duration to 30s */
+            color: white; /* Set the text color to white */
+            font-size: 20px; /* Adjusted font size to 20px */
+            font-weight: bold; /* Added bold font weight */
+        }
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .menu-bar {
+            position: absolute;
+            top: 8px;
+            left: 4px; /* Adjusted left position */
+            background-color: white; /* Set background color to white */
+            padding: 8px; /* Adjusted padding */
+            border-radius: 4px; /* Added border radius */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow */
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px; /* Adjusted margin top */
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-item {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #333;
+        }
+        .dropdown-item:hover {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        .upload-form {
+            text-align: center;
+            margin-top: 20px; /* Adjusted margin top */
+        }
+        .upload-form .upload-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .upload-form .upload-area.drag-over {
+            border-color: #4CAF50; /* Green */
+        }
+        .upload-form input[type=file] {
+            display: none;
+        }
+        .upload-form .upload-instruction {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+        }
+        .upload-form .file-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4CAF50; /* Green */
+            margin-top: 10px;
+        }
+        .upload-form input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-form input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .file-select {
+            margin-bottom: 20px;
+        }
+        .file-select label {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-block; /* Ensure button width fits content */
+        }
+        .file-select label:hover {
+            background-color: #45a049;
+        }
+        .file-select input[type=file] {
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f2f2f2;
+            border-radius: 4px;
+            margin-top: 10px; /* Adjusted margin top */
+        }
+        .progress {
+            width: 0;
+            height: 20px;
+            background-color: #4CAF50; /* Green */
+            border-radius: 4px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            margin-top: 5px; /* Adjusted margin top */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Image Upscaling</h1>
+        <div class="marquee-container">
+            <div class="marquee">
+                <p><strong>World Best AI Power Photo Upscaling Website. If You Want ADD FREE Experience Please Buy Our Software Only 10 Dollar For Lifetime</strong></p>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="dropdown">
+                <span class="dropdown-item">Menu &#9662;</span>
+                <div class="dropdown-content">
+                    <a href="#" class="dropdown-item">Image Upscaling</a>
+                    <a href="payment.html" class="dropdown-item">Price</a>
+                    <a href="#" class="dropdown-item">Privacy</a>
+                    <a href="#" class="dropdown-item">About</a>
+                    <a href="#" class="dropdown-item">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="file-select">
+                <label for="fileInput">Choose File</label>
+                <input type="file" id="fileInput" name="image" accept="image/*" onchange="displayFileName(this)">
+            </div>
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+                <p>Drag & Drop or Click to Upload Image</p>
+            </div>
+            <div class="upload-instruction">Supported formats: JPG, JPEG, PNG, GIF</div>
+            <div class="file-name" id="fileName"></div>
+            <input type="submit" value="Upload and Upscale">
+            <div class="progress-bar">
+                <div class="progress" id="progress">0%</div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function displayFileName(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('fileName').innerHTML = "Selected File: " + fileName;
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            document.querySelector('.upload-area').classList.add('drag-over');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            document.querySelector('.upload-area').classList.remove('drag-over');
+            var files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('fileInput').files = files;
+                displayFileName(document.getElementById('fileInput'));
+            }
+        }
+
+        var progressBar = document.getElementById('progress');
+        function simulateProgress() {
+            var progress = 0;
+            var interval = setInterval(function() {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                progressBar.style.width = progress + '%';
+                progressBar.innerHTML = Math.round(progress) + '%';
+            }, 500);
+        }
+
+        document.querySelector('.upload-form').addEventListener('submit', function() {
+            simulateProgress();
+        });
+    </script>
+</body>
+</html>
